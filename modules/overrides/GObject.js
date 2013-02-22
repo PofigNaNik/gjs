@@ -234,6 +234,16 @@ function _init() {
                                                nick, blurb, flags, default_value);
     };
 
+    this.ParamSpec.boxed = function(name, nick, blurb, flags, gtype) {
+        return GObject.ParamSpec._new_internal(name, gtype,
+                                               nick, blurb, flags);
+    },
+
+    this.ParamSpec.object = function(name, nick, blurb, flags, gtype) {
+        return GObject.ParamSpec._new_internal(name, gtype,
+                                               nick, blurb, flags);
+    },
+
     this.Class = GObjectMeta;
     this.Object.prototype.__metaclass__ = this.Class;
 
