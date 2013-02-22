@@ -75,6 +75,7 @@ jstests_DATA =					\
 	test/js/testLang.js			\
 	test/js/testLocale.js			\
 	test/js/testMainloop.js			\
+	test/js/testParams.js			\
 	test/js/testSignals.js			\
 	test/js/testSystem.js			\
 	test/js/testTweener.js			\
