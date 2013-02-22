@@ -31,6 +31,8 @@
 #include <gi/object.h>
 #include "system.h"
 
+static const int API_VERSION[] = { 1, 0 };
+
 static JSBool
 gjs_address_of(JSContext *context,
                unsigned   argc,
@@ -185,6 +187,14 @@ gjs_js_define_system_stuff(JSContext *context,
                            JS_PropertyStub,
                            JS_StrictPropertyStub,
                            GJS_MODULE_PROP_FLAGS | JSPROP_READONLY))
+        goto out;
+
+    if (!gjs_define_int_array(context, module,
+                              "$API_VERSION",
+                              G_N_ELEMENTS(API_VERSION),
+                              API_VERSION,
+                              GJS_MODULE_PROP_FLAGS &
+                              ~JSPROP_ENUMERATE))
         goto out;
 
     retval = JS_TRUE;
