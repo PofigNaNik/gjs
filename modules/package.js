@@ -44,6 +44,7 @@ var localedir;
 /*< private >*/
 let _base;
 let _requires;
+let _dumpRequires = false;
 
 function _runningFromSource(name) {
     if (System.version >= 13600) {
@@ -169,6 +170,11 @@ function start(params) {
 function require(libs) {
     _requires = libs;
 
+    if (_dumpRequires) {
+        dumpRequires();
+        System.exit(0);
+    }
+
     for (let l in libs) {
         let version = libs[l];
 
@@ -236,7 +242,10 @@ function _spawnGDB(debugIndex) {
 
 function _parseArgs() {
     for (let i = 0; i < ARGV.length; i++) {
-        if (ARGV[i] == '--debug')
+        if (ARGV[i] == '--debug') {
             _spawnGDB(i);
+        } else if (ARGV[i] == '--requires') {
+            _dumpRequires = true;
+        }
     }
 }
